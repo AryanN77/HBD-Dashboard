@@ -30,12 +30,13 @@ import ProductIncomplate from "./componunts/product master data/ProductIncomplat
 import ServiceComplate from "./componunts/service master data/ServiceComplate";
 import ServiceIncomplate from "./componunts/service master data/ServiceIncomplate";
 import GoogleMapScrapper from "./componunts/scrapper/GoogleMapScrapper";
-import ItemDataImport from "./componunts/data import/ItemDataImport";
+// import ItemDataImport from "./componunts/data import/ItemDataImport";
 import ProductDataImport from "./componunts/data import/ProductDataImport";
 import Dasboard2 from "./componunts/Dasboard2";
 import ListingDataReport from "./componunts/ListingDataReport";
 import ProductDataReport from "./componunts/ProductDataReport";
 import MisReportTable from "./componunts/Misreport";
+import ListingDataImport from "./componunts/data import/ListingDataImport";
 import { element } from "prop-types";
 import AmazonScraper from "./componunts/scrapper/AmazonScrapper";
 import DuplicateData from "./componunts/listing master data/DuplicateData";
@@ -90,10 +91,26 @@ export const routes = [
         name: "Upload Data",
         children: [
           {
-            icon: <DocumentTextIcon {...icon} />,
-            name: "Items Data",
-            path: "/data-imports/items-data",
-            element: <ItemDataImport />, // Placeholder for Items Data page
+            icon: <ArrowUpTrayIcon {...icon} />,
+            name: "Listing Data",
+            children: [
+              {
+                icon: <DocumentTextIcon {...icon} />,
+                name: "Google",
+                path: "/data-imports/listing-data/google-map",
+                element: <ListingDataImport />, // Placeholder for Listing Data Report page
+              },{
+                icon: <DocumentTextIcon {...icon} />,
+                name: "Zomoto",  
+                path: "/data-imports/listing-data/zomato",
+                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+              },{
+                icon: <DocumentTextIcon {...icon} />,
+                name: "Magicpin",  
+                path: "/data-imports/listing-data/magicpin",
+                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+              }
+            ]
           },{
             icon: <DocumentTextIcon {...icon} />,
             name: "Product Data",
