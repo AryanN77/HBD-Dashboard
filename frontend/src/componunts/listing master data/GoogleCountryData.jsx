@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
 import { listingData } from '@/data/listingJSON';
-const ListingComplete = () => {
+const GoogleCountryData = () => {
   const [loading, setLoading] = useState(false);
   const [fullData] = useState(listingData);  
   const [data, setData] = useState([]);    
@@ -39,7 +39,7 @@ const ListingComplete = () => {
           color="gray"
           className="mb-8 p-4 flex items-center justify-between"
         >
-          <Typography variant="h6" color="white">Country Data</Typography>
+          <Typography variant="h6" color="white">Google Country Data</Typography>
 
           <div className="flex items-center gap-4">
             <Button
@@ -126,4 +126,5 @@ const ListingComplete = () => {
   );
 };
 
-export default ListingComplete;
+export default GoogleCountryData;
+

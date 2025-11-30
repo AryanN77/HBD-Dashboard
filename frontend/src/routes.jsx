@@ -49,6 +49,9 @@ import Area from "./componunts/masterdata/location msater/Area";
 import City from "./componunts/masterdata/location msater/City";
 import ListingComplete from "./componunts/listing master data/ListingComplate";
 import ProductComplete from "./componunts/product master data/ProductComplate";
+import GoogleCountryData from "./componunts/listing master data/GoogleCountryData";
+import GoogleStateData from "./componunts/listing master data/GoogleStateData";
+import GoogleCityData from "./componunts/listing master data/GoogleCityData";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -198,7 +201,41 @@ export const routes = [
             name: "Duplicate Data",
             path: "listing-master-data/duplicate-data",
             element: <DuplicateData/>,
-         },
+          },
+          {
+            icon: <XCircleIcon {...icon} />,
+            name: "Google Data",
+            children: [
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "Country Data",
+              path: "listing-master-data/google-country-data",
+                element: <GoogleCountryData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "State Data",
+              path: "listing-master-data/google-state-data",
+                element: <GoogleStateData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "City Data",
+              path: "listing-master-data/google-city-data",
+                element: <GoogleCityData />,
+              },
+              
+            ]
+          },
+          {
+            icon: <XCircleIcon {...icon} />,
+            name: "Zomato Data",
+          },
+          {
+            icon: <XCircleIcon {...icon} />,
+            name: "JustDial Data",
+          },
+
         ]},
       {
         icon: <TableCellsIcon {...icon} />,
