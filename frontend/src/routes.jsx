@@ -212,6 +212,121 @@ export const routes = [
             name: "Complete Data",
             path: "listing-master-data/complete-data",
             element: <ListingComplete/>,
+         },{
+          icon: <TableCellsIcon {...icon} />, // <-- Changed to TableCellsIcon for data representation
+          name: "Magicpin",
+          children: [
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "Country Data",
+              path: "listing-master-data/google-country-data",
+                element: <GoogleCountryData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "State Data",
+              path: "listing-master-data/google-state-data",
+                element: <GoogleStateData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "City Data",
+              path: "listing-master-data/google-city-data",
+                element: <GoogleCityData />,
+              },
+          ]
+         },{
+          icon: <TableCellsIcon {...icon} />, // <-- Changed to TableCellsIcon for data representation
+          name: "Atm",
+          children: [
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "Country Data",
+              path: "listing-master-data/google-country-data",
+                element: <GoogleCountryData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "State Data",
+              path: "listing-master-data/google-state-data",
+                element: <GoogleStateData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "City Data",
+              path: "listing-master-data/google-city-data",
+                element: <GoogleCityData />,
+              },
+          ]
+         },{
+          icon: <TableCellsIcon {...icon} />, // <-- Changed to TableCellsIcon for data representation
+          name: "Bank Data",
+          children: [
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "Country Data",
+              path: "listing-master-data/google-country-data",
+                element: <GoogleCountryData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "State Data",
+              path: "listing-master-data/google-state-data",
+                element: <GoogleStateData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "City Data",
+              path: "listing-master-data/google-city-data",
+                element: <GoogleCityData />,
+              },
+          ]
+         },{
+          icon: <TableCellsIcon {...icon} />, // <-- Changed to TableCellsIcon for data representation
+          name: "College Dunia",
+          children: [
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "Country Data",
+              path: "listing-master-data/google-country-data",
+                element: <GoogleCountryData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "State Data",
+              path: "listing-master-data/google-state-data",
+                element: <GoogleStateData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "City Data",
+              path: "listing-master-data/google-city-data",
+                element: <GoogleCityData />,
+              },
+          ]
+         },{
+          icon: <TableCellsIcon {...icon} />, // <-- Changed to TableCellsIcon for data representation
+          name: "Heyplaces",
+          children: [
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "Country Data",
+              path: "listing-master-data/google-country-data",
+                element: <GoogleCountryData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "State Data",
+              path: "listing-master-data/google-state-data",
+                element: <GoogleStateData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "City Data",
+              path: "listing-master-data/google-city-data",
+                element: <GoogleCityData />,
+              },
+          ]
          },
         //   {
         //     icon: <XCircleIcon {...icon} />,
