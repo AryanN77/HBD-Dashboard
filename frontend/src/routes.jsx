@@ -49,6 +49,12 @@ import Area from "./componunts/masterdata/location msater/Area";
 import City from "./componunts/masterdata/location msater/City";
 import ListingComplete from "./componunts/listing master data/ListingComplate";
 import ProductComplete from "./componunts/product master data/ProductComplate";
+import GoogleCountryData from "./componunts/listing master data/Google/GoogleCountryData";
+import GoogleStateData from "./componunts/listing master data/Google/GoogleStateData";
+import GoogleCityData from "./componunts/listing master data/Google/GoogleCityData";
+import ZomatoCountryData from "./componunts/listing master data/Zomato/ZomatoCountryData";
+import ZomatoStateData from "./componunts/listing master data/Zomato/ZomatoStateData";
+import ZomatoCityData from "./componunts/listing master data/Zomato/ZomatoCityData";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -207,18 +213,69 @@ export const routes = [
             path: "listing-master-data/complete-data",
             element: <ListingComplete/>,
          },
+        //   {
+        //     icon: <XCircleIcon {...icon} />,
+        //     name: "Incomplete Data",
+        //     path: "listing-master-data/incomplete-data",                 -----> Hidden for Testing
+        //     element: <ListingIncomplate/>,
+        //  },                                                
+        //   {
+        //     icon: <XCircleIcon {...icon} />,
+        //     name: "Duplicate Data",
+        //     path: "listing-master-data/duplicate-data",                  -----> Hidden for Testing
+        //     element: <DuplicateData/>,
+        //   },
           {
             icon: <XCircleIcon {...icon} />,
-            name: "Incomplete Data",
-            path: "listing-master-data/incomplete-data",
-            element: <ListingIncomplate/>,
-         },
+            name: "Google Data",
+            children: [
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "Country Data",
+              path: "listing-master-data/google-country-data",
+                element: <GoogleCountryData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "State Data",
+              path: "listing-master-data/google-state-data",
+                element: <GoogleStateData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "City Data",
+              path: "listing-master-data/google-city-data",
+                element: <GoogleCityData />,
+              },
+
+            ]
+          },
           {
             icon: <XCircleIcon {...icon} />,
-            name: "Duplicate Data",
-            path: "listing-master-data/duplicate-data",
-            element: <DuplicateData/>,
-         },
+            name: "Zomato Data",
+            children: [
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "Country Data",
+              path: "listing-master-data/zomato-country-data",
+                element: <ZomatoCountryData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "State Data",
+              path: "listing-master-data/zomato-state-data",
+                element: <ZomatoStateData />,
+              },
+              {
+              icon: <XCircleIcon {...icon} />,
+              name: "City Data",
+              path: "listing-master-data/zomato-city-data",
+                element: <ZomatoCityData />,
+              },
+              
+            ]
+          },
+
         ]},
       {
         icon: <TableCellsIcon {...icon} />,

@@ -93,7 +93,7 @@ export function Sidenav({ brandImg, brandName, routes }) {
                 fullWidth
               >
                 {item.icon}
-                <Typography color="inherit" className="font-medium capitalize">
+                <Typography color="inherit" className="font-medium capitalize truncate whitespace-nowrap overflow-hidden">
                   {item.name}
                 </Typography>
                 <span className="ml-auto">
@@ -171,11 +171,11 @@ export function Sidenav({ brandImg, brandName, routes }) {
     {routes.map(({ layout, title, pages }, key) => (
       <ul key={key} className="mb-4 flex flex-col gap-1">
         {title && (
-          <li className="mx-3.5 mt-4 mb-2">
+          <li className="mx-3.5 mt-4 mb-2 ">
             <Typography
               variant="small"
               color={sidenavType === "dark" ? "white" : "blue-gray"}
-              className="font-black uppercase opacity-75"
+              className="font-black uppercase opacity-75 "
             >
               {title}
             </Typography>
