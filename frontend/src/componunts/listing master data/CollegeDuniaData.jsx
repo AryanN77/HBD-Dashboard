@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
 import { listingData } from '@/data/listingJSON';
-const GoogleCountryData = () => {
+const CollegeDuniaData = () => {
   const [loading, setLoading] = useState(false);
   const [fullData] = useState(listingData);  
   const [data, setData] = useState([]);    
@@ -39,7 +39,7 @@ const GoogleCountryData = () => {
           color="gray"
           className="mb-8 p-4 flex items-center justify-between"
         >
-          <Typography variant="h6" color="white">Google Country Data</Typography>
+          <Typography variant="h6" color="white">College Dunia</Typography>
 
           <div className="flex items-center gap-4">
             <Button
@@ -61,8 +61,20 @@ const GoogleCountryData = () => {
           <table className="w-full min-w-[640px] table-auto">
             <thead>
               <tr>
-                {["Name","Address","Website","Contact","Review Count","Review Average",
-                "Category","Sub-Category","City","State","Area"].map((head) => (
+                {["Name",
+"Address"	,
+"Area"	,
+"Avg Fees"	,
+"Rating"	,
+"Number"	,
+"Website"	,
+"Country	",
+"Subcategory	",
+"Category"	,
+"Course Details"	,
+"Duration"	,
+"Mail"	,
+"Requirement"].map((head) => (
                   <th key={head} className="border-b border-blue-gray-50 py-3 px-5 text-left">
                     <Typography
                       variant="small"
@@ -78,17 +90,21 @@ const GoogleCountryData = () => {
             <tbody>
               {data.map((item, idx) => (
                 <tr key={idx}>
-                  <td className="py-3 px-5">{item.name || "-"}</td>
-                  <td className="py-3 px-5">{item.address || "-"}</td>
-                  <td className="py-3 px-5">{item.website || "-"}</td>
-                  <td className="py-3 px-5">{item.phone_number || "-"}</td>
-                  <td className="py-3 px-5">{item.reviews_count || "-"}</td>
-                  <td className="py-3 px-5">{item.reviews_average || "-"}</td>
-                  <td className="py-3 px-5">{item.category || "-"}</td>
-                  <td className="py-3 px-5">{item.subcategory || "-"}</td>
-                  <td className="py-3 px-5">{item.city || "-"}</td>
-                  <td className="py-3 px-5">{item.state || "-"}</td>
-                  <td className="py-3 px-5">{item.area || "-"}</td>
+                  <td className="py-3 px-5">{item.Nam	 || "-"}</td>
+                  <td className="py-3 px-5">{item.Address		 || "-"}</td>
+                  <td className="py-3 px-5">{item.Area		 || "-"}</td>
+                  <td className="py-3 px-5">{item.Fees		 || "-"}</td>
+                  <td className="py-3 px-5">{item.Rating		 || "-"}</td>
+                  <td className="py-3 px-5">{item.Number		 || "-"}</td>
+                  <td className="py-3 px-5">{item.Website		 || "-"}</td>
+                  <td className="py-3 px-5">{item.Country		 || "-"}</td>
+                  <td className="py-3 px-5">{item.Subcategory		 || "-"}</td>
+                  <td className="py-3 px-5">{item.Category		 || "-"}</td>
+                  <td className="py-3 px-5">{item.Details		 || "-"}</td>
+                  <td className="py-3 px-5">{item.Duration		 || "-"}</td>
+                  <td className="py-3 px-5">{item.Mail 	 || "-"}</td>
+                  <td className="py-3 px-5">{item.Requirement		 || "-"}</td>
+                  
                 </tr>
               ))}
             </tbody>
@@ -126,5 +142,4 @@ const GoogleCountryData = () => {
   );
 };
 
-export default GoogleCountryData;
-
+export default CollegeDuniaData;
