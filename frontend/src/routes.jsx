@@ -166,49 +166,27 @@ export const routes = [
                 icon: <DocumentTextIcon {...icon} />,
                 name: "Asklaila",
                 path: "/data-imports/listing-data/asklaila",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                element: <AsklailaUploader />, // Placeholder for Listing Data Uploader page
               },{
                 icon: <DocumentTextIcon {...icon} />,
                 name: "JustDial",
                 path: "/data-imports/listing-data/justdial",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                element: <JustdialUploader />, // Placeholder for Listing Data Uploader page
               },{
                 icon: <DocumentTextIcon {...icon} />,
                 name: "PO India",
                 patch: "/data-imports/listing-data/po-india",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                element: <PostOfficeUploader />, // Placeholder for Listing Data Uploader page
               },{
                 icon: <DocumentTextIcon {...icon} />,
                 name: "Near Buy",
                 patch: "/data-imports/listing-data/near-buy",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                element: <NearbuyUploader />, // Placeholder for Listing Data Uploader page
               },{
                 icon: <DocumentTextIcon {...icon} />,
                 name: "SchoolGis",
                 patch: "/data-imports/listing-data/school-gis",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
-              },{
-                icon: <DocumentTextIcon {...icon} />,
-                name: "Yellow Pages",
-                patch: "/data-imports/listing-data/yellow-pages",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
-              },{
-                icon: <DocumentTextIcon {...icon} />,
-                name: "Pinda",
-                patch: "/data-imports/listing-data/pinda",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
-              },
-              {
-                icon: <DocumentTextIcon {...icon} />,
-                name: "Schoolgis",  
-                path: "/data-imports/listing-data/schoolgis",
                 element: <SchoolgisUploader />, // Placeholder for Listing Data Uploader page
-              },
-              {
-                icon: <DocumentTextIcon {...icon} />,
-                name: "Nearbuy",  
-                path: "/data-imports/listing-data/nearbuy",
-                element: <NearbuyUploader />, // Placeholder for Listing Data Uploader page
               },
               {
                 icon: <DocumentTextIcon {...icon} />,

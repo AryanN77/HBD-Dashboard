@@ -25,7 +25,7 @@ import {
 
 import { listingData } from "@/data/listingJSON";
 // import api from "@/api/api.jsx"; // your axios instance; used only when SERVER_PAGINATION = true
-import * as XLSX from "xlsx/dist/xlsx.full.min.js";
+// import * as XLSX from "xlsx/dist/xlsx.full.min.js";
 
 // ----------------- CONFIG -----------------
 const SERVER_PAGINATION = false; // set true to fetch pages from backend
