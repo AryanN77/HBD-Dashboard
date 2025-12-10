@@ -353,7 +353,7 @@ export const routes = [
           icon: <TableCellsIcon {...icon} />,
           name: "Pinda Data",
           path: "listing-master-data/pinda-data",            
-          element:<PindaData/>,
+          // element:<PindaData/>,
           },
 
         ]},
