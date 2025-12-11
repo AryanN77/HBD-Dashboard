@@ -19,6 +19,8 @@ import {
 } from "@heroicons/react/24/solid";
 import { listingData } from "@/data/listingJSON";
 import * as XLSX from "xlsx/dist/xlsx.full.min.js";
+// import api from "@/api/api.jsx"; // your axios instance; used only when SERVER_PAGINATION = true
+// import * as XLSX from "xlsx/dist/xlsx.full.min.js";
 
 const SERVER_PAGINATION = false;
 

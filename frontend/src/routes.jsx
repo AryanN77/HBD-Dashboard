@@ -60,6 +60,21 @@ import POIndiaData from "./componunts/listing master data/POIndiaData";
 import NearBuyData from "./componunts/listing master data/NearBuyData";
 import SchoolgisData from "./componunts/listing master data/SchoolgisData";
 import YellowPagesData from "./componunts/listing master data/YellowPagesData";
+import PindaData from "./componunts/listing master data/PindaData";
+import GoogleUploader from "./componunts/data import/GoogleUploader";
+import BankDataUploader from "./componunts/data import/BankDataUploader";
+import CollegeDuniaUploader from "./componunts/data import/CollegeDuniaUploader";
+import HeyPlacesUploader from "./componunts/data import/HeyPlacesUploader";
+import AtmUploader from "./componunts/data import/AtmUploader";
+import AsklailaUploader from "./componunts/data import/AsklailaUploader";
+import PindaUploader from "./componunts/data import/PindaUploader";
+import YellowPagesUploader from "./componunts/data import/YellowPagesUploader";
+import SchoolgisUploader from "./componunts/data import/SchoolgisUploader";
+import NearbuyUploader from "./componunts/data import/NearbuyUploader";
+import GoogleMapUploader from "./componunts/data import/GoogleMapUploader";
+import JustdialUploader from "./componunts/data import/JustdialUploader";
+import FreelistingUploader from "./componunts/data import/FreelistingUploader";
+import PostOfficeUploader from "./componunts/data import/PostOfficeUploader";
 
 const icon = {
   className: "w-5 h-5 text-inherit",
@@ -109,73 +124,94 @@ export const routes = [
                 icon: <DocumentTextIcon {...icon} />,
                 name: "Google",
                 path: "/data-imports/listing-data/google-map",
-                element: <ListingDataImport />, // Placeholder for Listing Data Report page
+                element: <GoogleUploader />, // Placeholder for Listing Data Report page
               },{
                 icon: <DocumentTextIcon {...icon} />,
-                name: "Zomoto",  
-                path: "/data-imports/listing-data/zomato",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                name: "Asklaila",  
+                path: "/data-imports/listing-data/asklaila",
+                element: <AsklailaUploader />, // Placeholder for Listing Data Uploader page
               },{
                 icon: <DocumentTextIcon {...icon} />,
-                name: "Magicpin",  
-                path: "/data-imports/listing-data/magicpin",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                name: "Pinda",  
+                path: "/data-imports/listing-data/pinda",
+                element: <PindaUploader />, // Placeholder for Listing Data Uploader page
               },{
                 icon: <DocumentTextIcon {...icon} />,
                 name: "Atm",  
                 path: "/data-imports/listing-data/atm",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                element: <AtmUploader />, // Placeholder for Listing Data Uploader page
               },{
                 icon: <DocumentTextIcon {...icon} />,
                 name: "Bank",  
                 path: "/data-imports/listing-data/bank-data",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                element: <BankDataUploader />, // Placeholder for Listing Data Uploader page
               },{
                 icon: <DocumentTextIcon {...icon} />,
                 name: "College Dunia",  
                 path: "/data-imports/listing-data/college-dunia",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
-              },{
+                element: <CollegeDuniaUploader />, // Placeholder for Listing Data Uploader page
+              },
+              {
                 icon: <DocumentTextIcon {...icon} />,
                 name: "Heyplaces",  
                 path: "/data-imports/listing-data/Heyplaces",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                element: <HeyPlacesUploader />, // Placeholder for Listing Data Uploader page
+              },
+              {
+                icon: <DocumentTextIcon {...icon} />,
+                name: "Yellow Pages",  
+                path: "/data-imports/listing-data/yellowpages",
+                element: <YellowPagesUploader />, // Placeholder for Listing Data Uploader page
               }, {
                 icon: <DocumentTextIcon {...icon} />,
                 name: "Asklaila",
                 path: "/data-imports/listing-data/asklaila",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                element: <AsklailaUploader />, // Placeholder for Listing Data Uploader page
               },{
                 icon: <DocumentTextIcon {...icon} />,
                 name: "JustDial",
                 path: "/data-imports/listing-data/justdial",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                element: <JustdialUploader />, // Placeholder for Listing Data Uploader page
               },{
                 icon: <DocumentTextIcon {...icon} />,
                 name: "PO India",
                 patch: "/data-imports/listing-data/po-india",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                element: <PostOfficeUploader />, // Placeholder for Listing Data Uploader page
               },{
                 icon: <DocumentTextIcon {...icon} />,
                 name: "Near Buy",
                 patch: "/data-imports/listing-data/near-buy",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
+                element: <NearbuyUploader />, // Placeholder for Listing Data Uploader page
               },{
                 icon: <DocumentTextIcon {...icon} />,
                 name: "SchoolGis",
                 patch: "/data-imports/listing-data/school-gis",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
-              },{
+                element: <SchoolgisUploader />, // Placeholder for Listing Data Uploader page
+              },
+              {
                 icon: <DocumentTextIcon {...icon} />,
-                name: "Yellow Pages",
-                patch: "/data-imports/listing-data/yellow-pages",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
-              },{
+                name: "Google Map Scrap Data",  
+                path: "/data-imports/listing-data/googlemap-scrap",
+                element: <GoogleMapUploader />, // Placeholder for Listing Data Uploader page
+              },
+              {
                 icon: <DocumentTextIcon {...icon} />,
-                name: "Pinda",
-                patch: "/data-imports/listing-data/pinda",
-                element: <ListingDataImport />, // Placeholder for Listing Data Uploader page
-              }
+                name: "Justdial",  
+                path: "/data-imports/listing-data/justdial",
+                element: <JustdialUploader />, // Placeholder for Listing Data Uploader page
+              },
+              {
+                icon: <DocumentTextIcon {...icon} />,
+                name: "Freelisting",  
+                path: "/data-imports/listing-data/freelisting",
+                element: <FreelistingUploader />, // Placeholder for Listing Data Uploader page
+              },
+              {
+                icon: <DocumentTextIcon {...icon} />,
+                name: "Post Offices",  
+                path: "/data-imports/listing-data/postoffice",
+                element: <PostOfficeUploader />, // Placeholder for Listing Data Uploader page
+              },
             ]
           },{
             icon: <DocumentTextIcon {...icon} />,
