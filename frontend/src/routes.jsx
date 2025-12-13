@@ -296,7 +296,7 @@ export const routes = [
 
           },
            {
-             icon: <XCircleIcon {...icon} />,
+             icon: <TableCellsIcon {...icon} />,
              name: "Google Data",
              path: "listing-master-data/google-data",            
              element:<GoogleData/>
@@ -389,7 +389,7 @@ export const routes = [
           icon: <TableCellsIcon {...icon} />,
           name: "Pinda Data",
           path: "listing-master-data/pinda-data",            
-          element:<PindaData/>,
+          // element:<PindaData/>,
           },
 
         ]},
