@@ -13,8 +13,7 @@ import {
   MagnifyingGlassIcon,
   ChevronUpDownIcon,
   ChevronDownIcon,
-  SunIcon,
-  MoonIcon,
+  ArrowDownTrayIcon,
 } from "@heroicons/react/24/solid";
 import { productData } from "@/data/productJSON";
 import * as XLSX from "xlsx/dist/xlsx.full.min.js";
@@ -41,18 +40,18 @@ const defaultColumns = [
   { key: "Manufacturer_Name", label: "Manufacturer Name", width: 180 },
 ];
 
-// Convert JSON array to CSV
 const convertToCSV = (arr) => {
-  if (!arr?.length) return "";
+  if (!arr.length) return "";
   const headers = Object.keys(arr[0]);
   const rows = arr.map((r) =>
-    headers.map((h) => `"${String(r[h] ?? "").replace(/"/g, "'")}"`).join(",")
+    headers
+      .map((h) => `"${String(r[h] ?? "").replace(/"/g, "'")}"`)
+      .join(",")
   );
   return [headers.join(","), ...rows].join("\n");
 };
 
-const ProductIncomplete = () => {
-  const [dark, setDark] = useState(false);
+const ProductComplete = () => {
   const [loading, setLoading] = useState(true);
   const [fullData, setFullData] = useState([]);
   const [pageData, setPageData] = useState([]);
@@ -70,7 +69,6 @@ const ProductIncomplete = () => {
 
   const resizerRef = useRef(null);
 
-  // Fetch data (client-side)
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
@@ -80,17 +78,22 @@ const ProductIncomplete = () => {
     }, 300);
   }, []);
 
-  // Filter & sort
   const filteredData = useMemo(() => {
     let data = [...fullData];
     if (search) {
       data = data.filter((x) =>
-        (x.Product_name || "").toLowerCase().includes(search.toLowerCase())
+        (x.Product_name || "")
+          .toString()
+          .toLowerCase()
+          .includes(search.toLowerCase())
       );
     }
     if (areaSearch) {
       data = data.filter((x) =>
-        (x.category || "").toLowerCase().includes(areaSearch.toLowerCase())
+        (x.category || "")
+          .toString()
+          .toLowerCase()
+          .includes(areaSearch.toLowerCase())
       );
     }
     return data;
@@ -102,11 +105,10 @@ const ProductIncomplete = () => {
       const A = String(a[sortField] ?? "").toLowerCase();
       const B = String(b[sortField] ?? "").toLowerCase();
       if (A === B) return 0;
-      return sortOrder === "asc" ? (A > B ? 1 : -1) : (A < B ? 1 : -1);
+      return sortOrder === "asc" ? (A > B ? 1 : -1) : A < B ? 1 : -1;
     });
   }, [filteredData, sortField, sortOrder]);
 
-  // Pagination
   useEffect(() => {
     const start = (currentPage - 1) * limit;
     setPageData(sortedData.slice(start, start + limit));
@@ -116,14 +118,14 @@ const ProductIncomplete = () => {
   const totalPages = Math.max(1, Math.ceil(total / limit));
 
   const toggleSort = (field) => {
-    if (sortField === field) setSortOrder((o) => (o === "asc" ? "desc" : "asc"));
-    else {
+    if (sortField === field) {
+      setSortOrder((o) => (o === "asc" ? "desc" : "asc"));
+    } else {
       setSortField(field);
       setSortOrder("asc");
     }
   };
 
-  // Download CSV/Excel
   const downloadCSV = (currentOnly = false) => {
     const arr = currentOnly ? pageData : fullData;
     const csv = convertToCSV(arr);
@@ -131,7 +133,7 @@ const ProductIncomplete = () => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = currentOnly ? "listing_page.csv" : "listing_all.csv";
+    a.download = currentOnly ? "page_data.csv" : "all_data.csv";
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -141,20 +143,22 @@ const ProductIncomplete = () => {
     if (!arr.length) return;
     const ws = XLSX.utils.json_to_sheet(arr);
     const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Listings");
-    XLSX.writeFile(wb, currentOnly ? "listing_page.xlsx" : "listing_all.xlsx");
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+    XLSX.writeFile(wb, currentOnly ? "page_data.xlsx" : "all_data.xlsx");
   };
 
-  // Column resize
   const startResize = (colKey, e) => {
     e.preventDefault();
     const startX = e.clientX;
     const col = columns.find((c) => c.key === colKey);
-    const startWidth = col.width;
+    const startWidth = col?.width || 100;
+
     const onMouseMove = (ev) => {
       const delta = ev.clientX - startX;
       const newWidth = Math.max(80, startWidth + delta);
-      setColumns((cols) => cols.map((c) => (c.key === colKey ? { ...c, width: newWidth } : c)));
+      setColumns((cols) =>
+        cols.map((c) => (c.key === colKey ? { ...c, width: newWidth } : c))
+      );
     };
     const onMouseUp = () => {
       document.removeEventListener("mousemove", onMouseMove);
@@ -165,77 +169,125 @@ const ProductIncomplete = () => {
   };
 
   return (
-    <div className={`min-h-screen mt-8 mb-12 px-4 rounded ${dark ? "bg-gray-900 text-gray-100" : "bg-white text-black"}`}>
+    <div className="min-h-screen mt-8 mb-12 px-4 bg-white text-black">
       <div className="flex justify-between items-center mb-4">
-        <Typography variant="h4">Product Incomplete Data</Typography>
-
+        <Typography variant="h4">Product Data</Typography>
         <div className="flex items-center gap-2">
-          <IconButton onClick={() => setDark((d) => !d)}>
-            {dark ? <SunIcon className="h-5 w-5 text-yellow-300" /> : <MoonIcon className="h-5 w-5" />}
-          </IconButton>
-
-          <Button size="sm" onClick={() => downloadCSV(false)} className={`${dark ? "bg-white text-black" : "bg-gray-800 text-gray-100"}`}>CSV All</Button>
-          <Button size="sm" onClick={() => downloadCSV(true)} className={`${dark ? "bg-white text-black" : "bg-gray-800 text-gray-100"}`}>CSV Page</Button>
-          <Button size="sm" onClick={() => downloadExcel(false)} className={`${dark ? "bg-white text-black" : "bg-gray-800 text-gray-100"}`}>Excel All</Button>
-          <Button size="sm" onClick={() => downloadExcel(true)} className={`${dark ? "bg-white text-black" : "bg-gray-800 text-gray-100"}`}>Excel Page</Button>
+          <Button size="sm" onClick={() => downloadCSV(false)}>CSV All</Button>
+          <Button size="sm" onClick={() => downloadCSV(true)}>CSV Page</Button>
+          <Button size="sm" onClick={() => downloadExcel(false)}>Excel All</Button>
+          <Button size="sm" onClick={() => downloadExcel(true)}>Excel Page</Button>
         </div>
       </div>
 
-      <Card className={`${dark ? "bg-gray-800 text-gray-100" : "bg-white text-black"}`}>
-        <CardHeader className={`flex flex-wrap items-center justify-between gap-3 p-4 ${dark ? "bg-white text-black" : "bg-gray-800 text-gray-100"}`}>
+      <Card className="bg-white text-black border">
+        <CardHeader className="flex flex-wrap items-center justify-between gap-3 p-4 bg-gray-100">
           <div className="flex gap-3 items-center flex-wrap">
-            <Input label="Search Name..." value={search} onChange={(e) => setSearch(e.target.value)} className={`${dark ? "bg-white text-black" : "text-gray-100"}`} />
-            <Input label="Search Category..." value={areaSearch} onChange={(e) => setAreaSearch(e.target.value)} icon={<MagnifyingGlassIcon className="h-5 w-5" />} className={`${dark ? "bg-white text-black" : "text-gray-100"}`} />
+            <Input
+              label="Search Name..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <Input
+              label="Search Category..."
+              value={areaSearch}
+              onChange={(e) => setAreaSearch(e.target.value)}
+              icon={<MagnifyingGlassIcon className="h-5 w-5" />}
+            />
           </div>
-
           <div className="flex gap-2 items-center">
             <div>Page {currentPage} / {totalPages}</div>
-            <Button size="sm" onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1}>Prev</Button>
-            <Button size="sm" onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages}>Next</Button>
+            <Button
+              size="sm"
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+            >
+              Prev
+            </Button>
+            <Button
+              size="sm"
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </Button>
           </div>
         </CardHeader>
 
         <CardBody className="p-0 overflow-x-auto">
           {loading ? (
-            <div className="flex justify-center py-10"><Spinner className="h-10 w-10" /></div>
+            <div className="flex justify-center py-10">
+              <Spinner className="h-10 w-10" />
+            </div>
           ) : (
             <table className="w-full table-fixed border-collapse min-w-[1500px]">
-              <thead className={`sticky top-0 z-20 border-b ${dark ? "bg-gray-800" : "bg-gray-100"}`}>
+              <thead className="sticky top-0 z-20 border-b bg-gray-200">
                 <tr>
                   {columns.map((col) => (
-                    <th key={col.key} style={{ width: col.width }} className="px-3 py-2 text-left relative select-none">
+                    <th
+                      key={col.key}
+                      style={{ width: col.width }}
+                      className="px-3 py-2 text-left relative select-none"
+                    >
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2 cursor-pointer" onClick={() => toggleSort(col.key)}>
+                        <div
+                          className="flex items-center gap-2 cursor-pointer"
+                          onClick={() => toggleSort(col.key)}
+                        >
                           <span className="capitalize text-sm font-semibold">{col.label}</span>
-                          {sortField === col.key ? (sortOrder === "asc" ? <ChevronUpDownIcon className="h-4" /> : <ChevronDownIcon className="h-4" />) : <ChevronUpDownIcon className="h-4 opacity-40" />}
+                          {sortField === col.key ? (
+                            sortOrder === "asc" ? (
+                              <ChevronUpDownIcon className="h-4" />
+                            ) : (
+                              <ChevronDownIcon className="h-4" />
+                            )
+                          ) : (
+                            <ChevronUpDownIcon className="h-4 opacity-40" />
+                          )}
                         </div>
-                        <div onMouseDown={(e) => startResize(col.key, e)} className="absolute right-0 top-0 h-full w-2 cursor-col-resize" title="Drag to resize">
-                          <div className="h-full w-px bg-transparent hover:bg-gray-300 dark:hover:bg-gray-600"></div>
-                        </div>
+                        <div
+                          onMouseDown={(e) => startResize(col.key, e)}
+                          className="absolute right-0 top-0 h-full w-2 cursor-col-resize"
+                          title="Drag to resize"
+                        ></div>
                       </div>
                     </th>
                   ))}
                 </tr>
               </thead>
-
               <tbody>
                 {pageData.length === 0 ? (
-                  <tr><td colSpan={columns.length} className="text-center p-6">No records found</td></tr>
-                ) : pageData.map((row, idx) => (
-                  <tr key={idx} className={`border-b transition-colors duration-200 ${dark ? "hover:bg-gray-700" : "hover:bg-gray-50"}`}>
-                    {columns.map((col) => (
-                      <td key={col.key} style={{ width: col.width, maxWidth: col.width }} className="px-3 py-3 break-words align-top text-sm">
-                        {col.key === "link" && row[col.key] ? (
-                          <a href={row[col.key]} target="_blank" rel="noopener noreferrer" className="text-blue-500 underline">
-                            {row[col.key].length > 40 ? row[col.key].slice(0, 40) + "..." : row[col.key]}
-                          </a>
-                        ) : (
-                          String(row[col.key] ?? "-")
-                        )}
-                      </td>
-                    ))}
+                  <tr>
+                    <td colSpan={columns.length} className="text-center p-6 text-gray-500">
+                      No records found
+                    </td>
                   </tr>
-                ))}
+                ) : (
+                  pageData.map((row, idx) => (
+                    <tr key={idx} className="border-b hover:bg-gray-50">
+                      {columns.map((col) => (
+                        <td
+                          key={col.key}
+                          style={{ width: col.width, maxWidth: col.width }}
+                          className="px-3 py-3 break-words text-sm"
+                        >
+                          {col.key === "link" && row[col.key] ? (
+                            <a
+                              href={row[col.key]}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-blue-500 underline"
+                            >
+                              {row[col.key].slice(0, 40) + (row[col.key].length > 40 ? "..." : "")}
+                            </a>
+                          ) : (
+                            String(row[col.key] ?? "-")
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                )}
               </tbody>
             </table>
           )}
@@ -243,14 +295,34 @@ const ProductIncomplete = () => {
       </Card>
 
       <div className="mt-4 flex justify-center items-center gap-2">
-        <Button size="sm" onClick={() => setCurrentPage(1)} disabled={currentPage === 1}>First</Button>
-        <Button size="sm" onClick={() => setCurrentPage((p) => Math.max(1, p - 1))} disabled={currentPage === 1}>Prev</Button>
+        <Button size="sm" onClick={() => setCurrentPage(1)} disabled={currentPage === 1}>
+          First
+        </Button>
+        <Button
+          size="sm"
+          onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+          disabled={currentPage === 1}
+        >
+          Prev
+        </Button>
         <div className="px-3 py-1 border rounded">Page {currentPage} / {totalPages}</div>
-        <Button size="sm" onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages}>Next</Button>
-        <Button size="sm" onClick={() => setCurrentPage(totalPages)} disabled={currentPage === totalPages}>Last</Button>
+        <Button
+          size="sm"
+          onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+          disabled={currentPage === totalPages}
+        >
+          Next
+        </Button>
+        <Button
+          size="sm"
+          onClick={() => setCurrentPage(totalPages)}
+          disabled={currentPage === totalPages}
+        >
+          Last
+        </Button>
       </div>
     </div>
   );
 };
 
-export default ProductIncomplete;
+export default ProductComplete;
